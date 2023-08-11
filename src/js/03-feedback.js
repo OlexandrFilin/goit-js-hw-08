@@ -3,7 +3,7 @@ import throttle from 'lodash.throttle';
 
 const elements = {
   formEl: document.querySelector('.feedback-form'),
-  emailEl: this.formEl.firstElemetChild,
+  // emailEl: this.formEl.firstElemetChild,
   emailEl: document.querySelector('.feedback-form input'),
 
   messageEl: document.querySelector('.feedback-form textarea'),
@@ -36,8 +36,8 @@ function onSubmit(e) {
     return;
   }
 
-  console.log('Form ', e.target);
-  console.log(' currenttarget', e.currenttarget);
+  // console.log('Form ', e.target);
+  // console.log(' currenttarget', e.currenttarget);
   e.target.reset();
   localStorage.removeItem('email');
   localStorage.removeItem('message');
