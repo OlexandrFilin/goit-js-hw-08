@@ -34,7 +34,7 @@ function onSubmit(e) {
   }
   e.target.reset();
   localStorage.removeItem('feedback-form-state');
-  for (key in dataForm) {
+  for (const key in dataForm) {
     dataForm[key] = '';
   }
   // console.log('dataForm  после удаления ', dataForm);
