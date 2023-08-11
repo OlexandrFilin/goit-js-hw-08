@@ -3,26 +3,19 @@ import throttle from 'lodash.throttle';
 
 const elements = {
   formEl: document.querySelector('.feedback-form'),
-  // emailEl: this.formEl.firstElemetChild,
   emailEl: document.querySelector('.feedback-form input'),
-
   messageEl: document.querySelector('.feedback-form textarea'),
   btnEl: document.querySelector('.feedback-form button'),
 };
-// const childForm = elements.formEl.children;
-// console.log(childForm);
-//elements.emailEl = elements.formEl.firstElemetChild;
 
-elements.formEl.addEventListener('input', throttle(onInput, 2500));
+elements.formEl.addEventListener('input', throttle(onInput, 500));
 elements.formEl.addEventListener('submit', onSubmit);
 const dataForm = {};
 
 getDataLocalStorage(dataForm);
-//console.log('dataForm ', dataForm);
+
 function onInput(e) {
   dataForm[e.target.name] = e.target.value;
-  // console.log(`input ${e.target.name} `, e.target.value);
-  // console.log('dataForm ', dataForm);
   localStorage.setItem('feedback-form-state', JSON.stringify(dataForm));
 }
 
@@ -37,7 +30,7 @@ function onSubmit(e) {
   for (const key in dataForm) {
     dataForm[key] = '';
   }
-  // console.log('dataForm  после удаления ', dataForm);
+  console.log('dataForm  после удаления ', dataForm);
 }
 
 function getDataLocalStorage(datObj) {
