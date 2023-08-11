@@ -37,7 +37,7 @@ function onSubmit(e) {
   for (key in dataForm) {
     dataForm[key] = '';
   }
-  console.log('dataForm  после удаления ', dataForm);
+  // console.log('dataForm  после удаления ', dataForm);
 }
 
 function getDataLocalStorage(datObj) {
