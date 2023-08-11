@@ -13,7 +13,7 @@ const elements = {
 // console.log(childForm);
 //elements.emailEl = elements.formEl.firstElemetChild;
 
-elements.formEl.addEventListener('input', throttle(onEnter, 2000));
+elements.formEl.addEventListener('input', throttle(onEnter, 500));
 elements.formEl.addEventListener('submit', onSubmit);
 const dataForm = {};
 getDataLocalStorage(dataForm);
