@@ -13,20 +13,17 @@ const elements = {
 // console.log(childForm);
 //elements.emailEl = elements.formEl.firstElemetChild;
 
-elements.formEl.addEventListener('input', throttle(onEnter, 500));
+elements.formEl.addEventListener('input', throttle(onInput, 2500));
 elements.formEl.addEventListener('submit', onSubmit);
 const dataForm = {};
+
 getDataLocalStorage(dataForm);
-
-function onEnter(e) {
+//console.log('dataForm ', dataForm);
+function onInput(e) {
   dataForm[e.target.name] = e.target.value;
-  addLocalStorage(dataForm);
-}
-
-function addLocalStorage(objData) {
-  for (const key in objData) {
-    localStorage.setItem(key, objData[key]);
-  }
+  // console.log(`input ${e.target.name} `, e.target.value);
+  // console.log('dataForm ', dataForm);
+  localStorage.setItem('feedback-form-state', JSON.stringify(dataForm));
 }
 
 function onSubmit(e) {
@@ -35,21 +32,25 @@ function onSubmit(e) {
     alert('Не заповнені данні форми. Форма не відправлена');
     return;
   }
-
-  // console.log('Form ', e.target);
-  // console.log(' currenttarget', e.currenttarget);
   e.target.reset();
-  localStorage.removeItem('email');
-  localStorage.removeItem('message');
+  localStorage.removeItem('feedback-form-state');
+  for (key in dataForm) {
+    dataForm[key] = '';
+  }
+  console.log('dataForm  после удаления ', dataForm);
 }
 
 function getDataLocalStorage(datObj) {
-  const email = localStorage.getItem('email');
-  const message = localStorage.getItem('message');
-  console.log('getDataLocalStorage  email', email);
-  console.log('getDataLocalStorage  message ', message);
-  datObj.email = email;
-  elements.emailEl.value = email;
-  datObj.message = message;
-  elements.messageEl.value = message;
+  datObj = JSON.parse(localStorage.getItem('feedback-form-state'));
+  console.log('get object  data form', datObj);
+  if (datObj) {
+    console.log('get from LocalStorage  email', datObj.email);
+    console.log('get from LocalStorage  message ', datObj.message);
+    if (datObj.email) {
+      elements.emailEl.value = datObj.email;
+    }
+    if (datObj.message) {
+      elements.messageEl.value = datObj.message;
+    }
+  }
 }
