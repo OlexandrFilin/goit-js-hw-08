@@ -1,13 +1,18 @@
-throttle = require('lodash.throttle');
+//throttle = require('lodash.throttle');
+import throttle from 'lodash.throttle';
 
 const elements = {
   formEl: document.querySelector('.feedback-form'),
+  emailEl: this.formEl.firstElemetChild,
   emailEl: document.querySelector('.feedback-form input'),
+
   messageEl: document.querySelector('.feedback-form textarea'),
   btnEl: document.querySelector('.feedback-form button'),
 };
+// const childForm = elements.formEl.children;
+// console.log(childForm);
+//elements.emailEl = elements.formEl.firstElemetChild;
 
-console.log('helolo');
 elements.formEl.addEventListener('input', throttle(onEnter, 2000));
 elements.formEl.addEventListener('submit', onSubmit);
 const dataForm = {};
@@ -27,7 +32,7 @@ function addLocalStorage(objData) {
 function onSubmit(e) {
   e.preventDefault();
   if (!elements.emailEl.value || !elements.messageEl.value) {
-    alert('не заповнені данні форми. форма не відправлена');
+    alert('Не заповнені данні форми. Форма не відправлена');
     return;
   }
 
@@ -41,15 +46,10 @@ function onSubmit(e) {
 function getDataLocalStorage(datObj) {
   const email = localStorage.getItem('email');
   const message = localStorage.getItem('message');
-  console.log(email);
-  console.log(message);
-  if (email) {
-    datObj.email = email;
-    elements.emailEl.value = email;
-  }
-
-  if (message) {
-    datObj.message = message;
-    elements.messageEl.value = message;
-  }
+  console.log('getDataLocalStorage  email', email);
+  console.log('getDataLocalStorage  message ', message);
+  datObj.email = email;
+  elements.emailEl.value = email;
+  datObj.message = message;
+  elements.messageEl.value = message;
 }
